@@ -1,0 +1,55 @@
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Link</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav mr-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Ara">
+                    <button class="btn btn-info my-2 my-sm-0" type="button"><i class="fa fa-search"></i></button>
+                </form>
+            </ul>
+
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-store"></i>Mağazalar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/seller/register">Mağaza Aç</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Mağazaları Gör</a>
+                    </div>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/register"><i class="fa fa-user"></i>Üye Ol</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/login"><i class="fa fa-user"></i>Giriş Yap</a>
+                </li>
+                <div sec:authorize="isAuthenticated()">
+                    <form id="myform" method="post" action="/logout"></form>
+                    <a class="nav-link" onclick="document.getElementById('myform').submit();"><i class="fa fa-user"></i>Çıkış Yap</a>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carts"><i class="fa fa-shopping-cart"></i>Sepetim</a>
+                </li>
+            </ul>
+
+
+        </div>
+    </nav>
+</header>

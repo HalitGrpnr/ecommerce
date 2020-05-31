@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row" th:object="${product}">
+        <div class="col-sm-4 item-photo">
+            <img  src="https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/8089707/8089707-a5dd0f.jpg">
+        </div>
+
+        <div class="col-sm-6">
+            <div class="container p-3 my-3 border">
+                <h3 th:text="${product.name}"/>
+                <h6 th:text="${product.information}"/>
+                <br>
+                <h3 th:text="${product.price}"> TL</h3>
+                <br>
+                <button type="submit" class="btn btn-success">HEMEN AL</button>
+                <button type="submit" class="btn btn-outline-secondary">Sepete Ekle</button>
+                <button class="btn btn-outline-secondary" data-toggle="tooltip" title="Favorilere Ekle"><i class="fa fa-heart"></i></button>
+            </div>
+
+            <div class="container p-3 my-3 border">
+                <h5>Ürün Bilgileri</h5>
+                <ul style="list-style-type:square;">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="container p-3 my-3 border">
+                <h5 th:text="${product.getStore().getName()}"><a style="color:#8FBC8F" href="#"></a></h5>
+                <h6 th:text="${product.getStore().getAverageRate()}"><small></small></h6>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h5>Ürün Yorumları</h5>
+
+    </div>
+</div>
+
+</body>
+</html>

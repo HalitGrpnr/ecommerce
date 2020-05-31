@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container p-3 border">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h4 class="card-title mt-3 text-center">Üyelik Bilgileri</h4>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/seller/register}" th:object="${userDto}" method="post" class="needs-validation"
+                          novalidate>
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <input id="name" name="name" placeholder="Adınız" type="text" class="form-control"
+                                       th:field="*{name}" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Lütfen adınızı giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <input id="surname" name="surname" placeholder="Soyadınız" type="text"
+                                       class="form-control" th:field="*{surname}" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Lütfen soyadınızı giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-store"></i>
+                                    </div>
+                                </div>
+                                <input id="storeName" name="storeName" placeholder="Mağaza Adı" type="text"
+                                       class="form-control" th:field="*{sellerDto.storeDto.name}" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Lütfen mağaza adını giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                </div>
+                                <input id="email" name="email" placeholder="Email" type="email" class="form-control"
+                                       th:field="*{email}" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Lütfen geçerli bir e-mail adresi giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                </div>
+                                <input id="phone" name="phone" placeholder="Telefon" type="tel" class="form-control"
+                                       th:field="*{phone}" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Lütfen geçerli bir telefon numarası giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-lock"></i>
+                                    </div>
+                                </div>
+                                <input id="password" name="password" placeholder="Şifre" type="password"
+                                       class="form-control" th:field="*{password}" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Lütfen geçerli bir şifre giriniz.</div>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input id="terms" type="checkbox" required/>
+                            <label class="control-label" for="terms">
+                                <a data-toggle="modal" href="#myModal">Üyelik koşulları</a>'nı okudum, kabul ediyorum.
+                            </label>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">Lütfen üyelik koşullarını okuyarak kabul ediniz</div>
+                        </div>
+                        <div class="form-group row">
+                            <button name="submit" type="submit" class="btn btn-primary btn-lg btn-block">Kaydol</button>
+                        </div>
+                        <p class="text-center">Üye misiniz? <a href="/login"><br>Giriş Yapın</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h1 class="modal-title">Üyelik Koşulları</h1>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    // Disable form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Get the forms we want to add validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+

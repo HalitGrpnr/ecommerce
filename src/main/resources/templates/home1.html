@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h1 th:inline="text">Hello!</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/stores">Stores</a></li>
+        <li><a href="/products">Products</a></li>
+        <div sec:authorize="isAuthenticated()">
+<!--            <a th:href="@{/users/} + ${user.id} + @{/cart}">My Cart</a>-->
+            <a th:href="@{/carts}">My Cart</a>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <a href="/login" class="btn btn-info" role="button">Login</a>
+        </div>
+    </ul>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
+<!--<head>-->
+<!--    <title>Inventory Home</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav role="navigation">-->
+<!--    <ul>-->
+<!--        <li><a href="/">Home</a></li>-->
+<!--        <li><a href="/stores">Stores</a></li>-->
+<!--        <li><a href="/products">Products</a></li>-->
+<!--      &lt;!&ndash;  <li sec:authorize="isAuthenticated()">-->
+<!--            <a th:href="@{/users/} + ${user.id} + @{/cart}">My Cart</a>-->
+<!--        </li>&ndash;&gt;-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<!--<div sec:authorize="isAnonymous()">-->
+<!--    <h1>Welcome!</h1>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;<div sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1 th:text="'Welcome, ' + ${user.username} + '!'"></h1>&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1 th:text="'Welcome ' + ${user.username} + '!'"></h1>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--<div sec:authorize="isAnonymous()">-->
+<!--    <p>Click <a th:href="@{/login}">here</a> to login.</p>-->
+<!--    <p>Click <a th:href="@{/register}">here</a> to register.</p>-->
+<!--</div>-->
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--    <form th:action="@{/logout}" method="post">-->
+<!--        <input type="submit" value="Log Out"/>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
